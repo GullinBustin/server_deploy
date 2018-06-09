@@ -1,0 +1,32 @@
+version: "3"
+services:
+  server:
+    build: ./50x15_2017
+    env_file: 50x15.env
+    networks:
+      - default
+    volumes:
+      - db_data:/data/db
+    restart: always
+
+  database:
+    image: mongo:3.4.10
+    networks:
+      - default
+    restart: always
+
+  fill_db:
+    build: ./Preguntas
+    env_file: 50x15.env
+    networks:
+      - default
+
+  front_end:
+    build: ./web50x15
+    env_file: 50x15.env
+    volumes:
+      - /var/www/50x15:/opt/CpQ/50x15/
+    networks:
+      - default
+volumes:
+    db_data:

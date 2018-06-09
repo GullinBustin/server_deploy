@@ -1,0 +1,23 @@
+services:
+   db:
+     image: mysql:5.7
+     volumes:
+       - db_data:/var/lib/mysql
+     restart: always
+     networks:
+       - default
+     env_file: wordpress.env
+
+   wordpress:
+     depends_on:
+       - db
+     image: wordpress:4.9.6-php7.0-fpm
+     volumes:
+       - /var/www/html:/var/www/html
+     restart: always
+     networks:
+       - default
+     env_file: wordpress.env
+
+volumes:
+    db_data:
