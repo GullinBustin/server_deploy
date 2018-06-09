@@ -5,12 +5,12 @@ services:
     env_file: 50x15.env
     networks:
       - default
-    volumes:
-      - db_data:/data/db
     restart: always
 
   database:
     image: mongo:3.4.10
+    volumes:
+      - db_data:/data/db
     networks:
       - default
     restart: always
